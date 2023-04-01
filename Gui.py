@@ -3,7 +3,7 @@ from Sound import Audio
 import threading
 audio = Audio()
 root = Tk()
-root.title("GUITest")
+root.title("Audio")
 class GUI:
     def __init__(self, root):
         self.isPlaying = False
@@ -25,14 +25,14 @@ class GUI:
         # Create amplitude scale
         self.amp_label = Label(root, text="Amplitude:")
         self.amp_label.pack()
-        self.amp_scale = Scale(root, from_=0, to=10, orient=HORIZONTAL, resolution=0.1, variable = self.amp_value)
+        self.amp_scale = Scale(root, from_=0, to=100, orient=HORIZONTAL, resolution=0.1, variable = self.amp_value)
         self.amp_scale.set(1)
         self.amp_scale.pack()
 
         # Create pitch shift scale
         self.pitch_label = Label(root, text="Pitch shift:")
         self.pitch_label.pack()
-        self.pitch_scale = Scale(root, from_=0, to=10, orient=HORIZONTAL, resolution=0.05, variable = self.pitch_value)
+        self.pitch_scale = Scale(root, from_=-10, to=10, orient=HORIZONTAL, resolution=0.05, variable = self.pitch_value)
         self.pitch_scale.set(0)
         self.pitch_scale.pack()
         # Create Play Button
