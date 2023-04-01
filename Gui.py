@@ -12,6 +12,8 @@ class GUI:
             print("Pitch modified")
         def play_audio(self):
             print("Play")
+
+
         
         # Create amplitude scale
         self.amp_label = Label(root, text="Amplitude:")
@@ -28,6 +30,15 @@ class GUI:
         # Create play button
         self.play_button = Button(root, text="Play", command=play_audio)
         self.play_button.pack()
+
+        #Duration slider
+        self.slider = Scale(root, from_=5, to=100, orient='horizontal', length=300)
+        self.slider.pack()
+        
+        def modify_time(value):
+            print(value)
+
+        self.slider.config(command = lambda value: modify_time(self.slider.get()))
 
 
 
