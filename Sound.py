@@ -1,6 +1,5 @@
 import librosa
 import numpy as np
-import IPython.display as ipd
 import sounddevice as sd
 class Audio:
     def __init__(self):
@@ -14,9 +13,4 @@ class Audio:
             self.y_mod = librosa.util.normalize(y_pitch)
 
     def play_audio(self):
-        self.y_mod = self.y
         sd.play(self.y, self.sr, blocking=True)
-
-
-audio = Audio()
-audio.play_audio()

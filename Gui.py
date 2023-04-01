@@ -1,5 +1,6 @@
 from tkinter import *
-
+from Sound import Audio
+audio = Audio()
 root = Tk()
 root.title("GUITest")
 class GUI:
@@ -7,14 +8,12 @@ class GUI:
 
         # Placeholder commands
         def modify_amplitude(self):
-            print("Amplitude modified")
+            print("test")
         def modify_pitch(self):
             print("Pitch modified")
-        def play_audio(self):
-            print("Play")
-
-
-        
+        def play_audio():
+            audio.play_audio()
+            
         # Create amplitude scale
         self.amp_label = Label(root, text="Amplitude:")
         self.amp_label.pack()
@@ -26,12 +25,11 @@ class GUI:
         self.pitch_label.pack()
         self.pitch_scale = Scale(root, from_=-12, to=12, orient=HORIZONTAL, command=modify_pitch)
         self.pitch_scale.pack()
-
-        # Create play button
+        # Create Play Button
         self.play_button = Button(root, text="Play", command=play_audio)
         self.play_button.pack()
 
-        #Duration slider
+        # Duration slider
         self.slider = Scale(root, from_=0, to=100, orient='horizontal', length=300)
         self.slider.pack()
 
