@@ -13,4 +13,6 @@ class Audio:
             self.y_mod = librosa.util.normalize(y_pitch)
 
     def play_audio(self):
+        self.y = self.y[:]
         sd.play(self.y, self.sr, blocking=True)
+        print(self.sr)

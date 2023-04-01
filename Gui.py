@@ -1,5 +1,6 @@
 from tkinter import *
 from Sound import Audio
+import threading
 audio = Audio()
 root = Tk()
 root.title("GUITest")
@@ -12,7 +13,8 @@ class GUI:
         def modify_pitch(self):
             print("Pitch modified")
         def play_audio():
-            audio.play_audio()
+            thread = threading.Thread(target=audio.play_audio)
+            thread.start()
             
         # Create amplitude scale
         self.amp_label = Label(root, text="Amplitude:")
