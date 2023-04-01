@@ -6,33 +6,41 @@ root = Tk()
 root.title("GUITest")
 class GUI:
     def __init__(self, root):
-
+        self.isPlaying = False
+        self.slider_value = IntVar(value = 0)
+        self.amp_value = DoubleVar(value = 0.0)
+        self.pitch_value = DoubleVar(value = 0.0)
         # Placeholder commands
-        def modify_amplitude(self):
-            print("test")
-        def modify_pitch(self):
-            print("Pitch modified")
         def play_audio():
-            thread = threading.Thread(target=audio.play_audio)
-            thread.start()
+            if self.isPlaying == False:
+                self.isPlaying = True
+                self.audio = Audio()
+                thread = threading.Thread(target=self.audio.play_audio, args=[self.slider_value.get(),self.amp_value.get(),self.pitch_value.get()])
+                thread.start()
+            else:
+                self.isPlaying = False
+                self.audio.stop_audio()
+
             
         # Create amplitude scale
         self.amp_label = Label(root, text="Amplitude:")
         self.amp_label.pack()
-        self.amp_scale = Scale(root, from_=0, to=4, orient=HORIZONTAL, resolution=0.1, command=modify_amplitude)
+        self.amp_scale = Scale(root, from_=0, to=10, orient=HORIZONTAL, resolution=0.1, variable = self.amp_value)
+        self.amp_scale.set(1)
         self.amp_scale.pack()
 
         # Create pitch shift scale
         self.pitch_label = Label(root, text="Pitch shift:")
         self.pitch_label.pack()
-        self.pitch_scale = Scale(root, from_=-12, to=12, orient=HORIZONTAL, command=modify_pitch)
+        self.pitch_scale = Scale(root, from_=0, to=10, orient=HORIZONTAL, resolution=0.05, variable = self.pitch_value)
+        self.pitch_scale.set(0)
         self.pitch_scale.pack()
         # Create Play Button
         self.play_button = Button(root, text="Play", command=play_audio)
         self.play_button.pack()
 
         # Duration slider
-        self.slider = Scale(root, from_=0, to=100, orient='horizontal', length=300)
+        self.slider = Scale(root, from_=0, to= audio.getLength(), orient='horizontal', length=300, variable=self.slider_value)
         self.slider.pack()
 
         def modify_time(value):

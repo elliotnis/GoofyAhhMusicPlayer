@@ -4,15 +4,15 @@ import sounddevice as sd
 class Audio:
     def __init__(self):
         self.y, self.sr = librosa.load(r'C:\Users\ellio\Documents\GoofyAhhMusicPlayer\testsounds\piano-C4.wav')
-    def modify_amplitude(self, value):
-            y_amp = self.y * float(value)
-            self.y_mod = librosa.util.normalize(y_amp)
 
-    def modify_pitch(self, value):
-            y_pitch = librosa.effects.pitch_shift(self.y, self.sr, n_steps=float(value))
-            self.y_mod = librosa.util.normalize(y_pitch)
+    def play_audio(self,start, amplitude = 0, pitch=0):
+        y_pitch = librosa.effects.pitch_shift(self.y, sr=self.sr, n_steps=float(pitch))
+        self.y_mod = librosa.util.normalize(y_pitch)
+        self.y_mod = self.y_mod[start:]
+        sd.play(self.y_mod*amplitude, self.sr)
 
-    def play_audio(self):
-        self.y = self.y[:]
-        sd.play(self.y, self.sr, blocking=True)
-        print(self.sr)
+    def getLength(self):
+        return len(self.y)
+    def stop_audio(self):
+        sd.stop()
+
