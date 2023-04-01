@@ -32,13 +32,14 @@ class GUI:
         self.play_button.pack()
 
         #Duration slider
-        self.slider = Scale(root, from_=5, to=100, orient='horizontal', length=300)
+        self.slider = Scale(root, from_=0, to=100, orient='horizontal', length=300)
         self.slider.pack()
-        
+
         def modify_time(value):
             print(value)
 
         self.slider.config(command = lambda value: modify_time(self.slider.get()))
+
 
 
 
