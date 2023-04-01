@@ -7,8 +7,6 @@ class AudioGUI:
     def __init__(self, audio_file):
         self.y, self.sr = librosa.load(audio_file)
 
-        self.root = tk.Tk()
-        self.root.title("Audio GUI")
 
         # Create amplitude scale
         self.amp_label = tk.Label(self.root, text="Amplitude:")
@@ -26,20 +24,20 @@ class AudioGUI:
         self.play_button = tk.Button(self.root, text="Play", command=self.play_audio)
         self.play_button.pack()
 
-    def modify_amplitude(self, value):
-        y_amp = self.y * float(value)
-        self.y_mod = librosa.util.normalize(y_amp)
+#     def modify_amplitude(self, value):
+#         y_amp = self.y * float(value)
+#         self.y_mod = librosa.util.normalize(y_amp)
 
-    def modify_pitch(self, value):
-        y_pitch = librosa.effects.pitch_shift(self.y, self.sr, n_steps=float(value))
-        self.y_mod = librosa.util.normalize(y_pitch)
+#     def modify_pitch(self, value):
+#         y_pitch = librosa.effects.pitch_shift(self.y, self.sr, n_steps=float(value))
+#         self.y_mod = librosa.util.normalize(y_pitch)
 
-    def play_audio(self):
-        ipd.display(ipd.Audio(self.y_mod, rate=self.sr))
+#     def play_audio(self):
+#         ipd.display(ipd.Audio(self.y_mod, rate=self.sr))
 
     def run(self):
         self.root.mainloop()
 
 if __name__ == '__main__':
-    audio_gui = AudioGUI('audio_file.wav')
+    audio_gui = AudioGUI('test.wav')
     audio_gui.run()
