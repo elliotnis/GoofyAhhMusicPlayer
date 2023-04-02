@@ -16,4 +16,5 @@ class Audio:
         return len(self.y)
     def stop_audio(self):
         sd.stop()
-
+    def getSamplingRate(self):
+        return self.sr

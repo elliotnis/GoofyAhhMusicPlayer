@@ -40,11 +40,17 @@ class GUI:
         self.play_button.pack()
 
         # Duration slider
-        self.slider = Scale(root, from_=0, to= audio.getLength(), orient='horizontal', length=300, variable=self.slider_value)
+        self.slider = Scale(root, from_=0, to= audio.getLength(), orient='horizontal', length=300, variable=self.slider_value, showvalue = True)
         self.slider.pack()
+        self.slider.config(showvalue = False)
 
         def modify_time(value):
-            print(value)
+            try: 
+                self.time_label.destroy()
+            finally:
+                samplesperpixel = audio.getLength()/300
+                self.time_label = Label(root, text=str(int(value/audio.getSamplingRate())))
+                self.time_label.place(x=self.slider_value.get()/samplesperpixel,y=140)
 
         self.slider.config(command = lambda value: modify_time(self.slider.get()))
 
