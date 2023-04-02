@@ -4,7 +4,7 @@ import numpy as np
 import sounddevice as sd
 class Audio:
     def __init__(self):
-        self.y, self.sr = librosa.load(os.getcwd() + r"\testsounds\piano-C4.wav")
+        self.y, self.sr = librosa.load(os.getcwd() + r"\testsounds\nokia-ringtone-arabic.mp3")
 
     def play_audio(self,start, amplitude = 0, pitch=0):
         y_pitch = librosa.effects.pitch_shift(self.y, sr=self.sr, n_steps=float(pitch))

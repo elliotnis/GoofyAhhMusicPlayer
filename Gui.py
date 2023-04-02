@@ -22,8 +22,8 @@ class GUI:
                 self.audio.stop_audio()
 
             
-        # Create amplitude scale
-        self.amp_label = Label(root, text="Amplitude:")
+        # Create Volume scale
+        self.amp_label = Label(root, text="Volume:")
         self.amp_label.pack()
         self.amp_scale = Scale(root, from_=0, to=100, orient=HORIZONTAL, resolution=0.1, variable = self.amp_value)
         self.amp_scale.set(1)
