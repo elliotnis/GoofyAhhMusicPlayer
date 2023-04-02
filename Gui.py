@@ -1,6 +1,7 @@
 from tkinter import *
 from Sound import Audio
 import threading
+import time
 audio = Audio()
 root = Tk()
 root.title("Audio")
@@ -50,8 +51,16 @@ class GUI:
             finally:
                 samplesperpixel = audio.getLength()/300
                 self.time_label = Label(root, text=str(int(value/audio.getSamplingRate())))
-                self.time_label.place(x=self.slider_value.get()/samplesperpixel,y=140)
-
+                self.time_label.place(x=self.slider_value.get()/(samplesperpixel/0.94),y=140)
+        def incrementtime(self):
+            while(True):
+                if self.isPlaying == True:
+                    time.sleep(1)                
+                    self.slider.set(self.slider_value.get()+audio.getSamplingRate())
+                elif self.isPlaying == False and self.slider_value.get() == audio.getLength():
+                    self.slider.set(0)
+        thread2 = threading.Thread(target = incrementtime, args=[self])
+        thread2.start()
         self.slider.config(command = lambda value: modify_time(self.slider.get()))
 
 
