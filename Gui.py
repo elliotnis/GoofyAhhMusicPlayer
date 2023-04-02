@@ -58,14 +58,15 @@ class GUI:
         self.slider = Scale(root, from_=0, to= audio.getLength(), orient='horizontal', length=300, variable=self.slider_value, showvalue = True)
         self.slider.pack()
         self.slider.config(showvalue = False)
-
+        # Time label
+        self.time_label = Label(root, text=0)
+        self.time_label.place(x=0,y=195)
         def modify_time(value):
-            try: 
                 self.time_label.destroy()
-            finally:
                 samplesperpixel = audio.getLength()/300
                 self.time_label = Label(root, text=str(int(value/audio.getSamplingRate())))
                 self.time_label.place(x=self.slider_value.get()/(samplesperpixel/0.94),y=195)
+        
         def incrementtime(self):
             while(True):
                 if self.isPlaying == True:
